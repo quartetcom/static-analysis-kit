@@ -12,5 +12,6 @@ jobs:
       - php/install-composer
       - php/install-packages
 
+      - run: rm -f ./composer-setup.php || true
       - run: composer analyse
       - run: composer test
