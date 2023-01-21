@@ -38,13 +38,13 @@ class InstallCommand extends Command
             $this->installIntellijSettings($io);
         }
 
-        if (!file_exists('./.circleci/config.yml') &&
-            $io->confirm('Are you using CircleCI? We will add .circleci/config.yml for you.')) {
+        if (!file_exists('./.circleci/config.yml')
+            && $io->confirm('Are you using CircleCI? We will add .circleci/config.yml for you.')) {
             $this->installCircleCiWorkflow($io);
         }
 
-        if (!file_exists('./.github/workflows/php.yml') &&
-            $io->confirm('Are you using GitHub Actions? We will add .github/workflows/php.yml for you.')) {
+        if (!file_exists('./.github/workflows/php.yml')
+            && $io->confirm('Are you using GitHub Actions? We will add .github/workflows/php.yml for you.')) {
             $this->installGitHubActionsWorkflow($io);
         }
 
@@ -108,15 +108,15 @@ class InstallCommand extends Command
     private function modifyComposerJson(SymfonyStyle $io): void
     {
         $path = '/composer.json';
-        $source = __DIR__ . '/../..' . $path;
-        $target = '.' . $path;
+        $source = __DIR__.'/../..'.$path;
+        $target = '.'.$path;
 
         $ignore = [
             'post-autoload-dump',
         ];
 
-        $sourceJson = json_decode(file_get_contents($source), true, flags: JSON_THROW_ON_ERROR);
-        $targetJson = json_decode(file_get_contents($target), true, flags: JSON_THROW_ON_ERROR);
+        $sourceJson = json_decode(file_get_contents($source), true, flags: \JSON_THROW_ON_ERROR);
+        $targetJson = json_decode(file_get_contents($target), true, flags: \JSON_THROW_ON_ERROR);
 
         foreach (['scripts', 'scripts-descriptions'] as $group) {
             if (!isset($targetJson[$group])) {
@@ -124,7 +124,7 @@ class InstallCommand extends Command
             }
 
             foreach ($sourceJson[$group] as $key => $value) {
-                if (!in_array($key, $ignore)) {
+                if (!\in_array($key, $ignore, true)) {
                     $targetJson[$group][$key] = $value;
                 }
             }
@@ -132,7 +132,7 @@ class InstallCommand extends Command
 
         file_put_contents(
             $target,
-            json_encode($targetJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n",
+            json_encode($targetJson, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES)."\n",
         );
 
         $io->success([
@@ -143,17 +143,17 @@ class InstallCommand extends Command
 
     private function installFile(string $path, ?SymfonyStyle $io = null, bool $confirmOverride = false): void
     {
-        $source = __DIR__ . '/../..' . $path;
-        $target = '.' . $path;
+        $source = __DIR__.'/../..'.$path;
+        $target = '.'.$path;
 
-        if (!file_exists($directory = dirname($target))) {
+        if (!file_exists($directory = \dirname($target))) {
             mkdir($directory);
         } elseif (!is_dir($directory)) {
-            throw new \RuntimeException("Path '$directory' is not a directory.");
+            throw new \RuntimeException("Path '{$directory}' is not a directory.");
         }
 
-        if ($confirmOverride && file_exists($target) &&
-            !$io?->confirm("File {$target} already exists. Are you sure you want to overwrite?")) {
+        if ($confirmOverride && file_exists($target)
+            && !$io?->confirm("File {$target} already exists. Are you sure you want to overwrite?")) {
             $io?->text("Skipped installing '{$target}'.");
 
             return;
