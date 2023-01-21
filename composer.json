@@ -11,7 +11,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "friendsofphp/php-cs-fixer": "^3.13",
         "phpstan/phpstan": "^1.9",
         "rector/rector": "^0.15.10",
