@@ -108,15 +108,26 @@ class InstallCommand extends Command
     private function modifyComposerJson(SymfonyStyle $io): void
     {
         $path = '/composer.json';
-        $source = __DIR__.'/../..'.$path;
-        $target = '.'.$path;
+        $source = __DIR__ . '/../..' . $path;
+        $target = '.' . $path;
 
         $ignore = [
             'post-autoload-dump',
         ];
 
-        $sourceJson = json_decode(file_get_contents($source), true, flags: \JSON_THROW_ON_ERROR);
-        $targetJson = json_decode(file_get_contents($target), true, flags: \JSON_THROW_ON_ERROR);
+        if (($sourceFile = file_get_contents($source)) === false) {
+            throw new \RuntimeException("Failed to open file '{$sourceFile}'.");
+        }
+
+        if (($targetFile = file_get_contents($target)) === false) {
+            throw new \RuntimeException("Failed to open file '{$sourceFile}'.");
+        }
+
+        $sourceJson = json_decode($sourceFile, true, flags: \JSON_THROW_ON_ERROR);
+        $targetJson = json_decode($targetFile, true, flags: \JSON_THROW_ON_ERROR);
+
+        \assert(\is_array($sourceJson));
+        \assert(\is_array($targetJson));
 
         foreach (['scripts', 'scripts-descriptions'] as $group) {
             if (!isset($targetJson[$group])) {
@@ -132,7 +143,7 @@ class InstallCommand extends Command
 
         file_put_contents(
             $target,
-            json_encode($targetJson, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES)."\n",
+            json_encode($targetJson, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES) . "\n",
         );
 
         $io->success([
@@ -143,8 +154,8 @@ class InstallCommand extends Command
 
     private function installFile(string $path, ?SymfonyStyle $io = null, bool $confirmOverride = false): void
     {
-        $source = __DIR__.'/../..'.$path;
-        $target = '.'.$path;
+        $source = __DIR__ . '/../..' . $path;
+        $target = '.' . $path;
 
         if (!file_exists($directory = \dirname($target))) {
             mkdir($directory);

@@ -18,6 +18,7 @@ class Config extends BaseConfig
         '@PhpCsFixer' => true,
         '@Symfony' => true,
         '@DoctrineAnnotation' => true,
+        'concat_space' => ['spacing' => 'one'],
         'control_structure_braces' => true,
         'control_structure_continuation_position' => true,
         'curly_braces_position' => true,
