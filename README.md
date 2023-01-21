@@ -12,3 +12,14 @@ composer require --dev quartetcom/static-analysis-kit
 ```
 
 質問に従うと自動的にプロジェクトが最適な設定になります．
+
+## ✅ 開発フロー
+
+1. コードを変更する
+2. PhpStorm で Reformat Code を行う (⌘L)
+3. 波線のついたエラーがないことを確認する (スクロールバーのところでハイライトされる)
+4. `composer analyse` を実行する
+5. フォーマットに関する問題は `composer fix` で解決できる
+6. それでも治らない問題はコードが悪いのでエラーに沿って解決する
+   (`composer fix:risky` や `composer fix:rector` で解決を試みることもできるが，これは既存のコードのビヘイビアを破壊する可能性が あるので差分をよく確認すること)
+7. `composer analyse` のエラーがないことを確認してコミットする
