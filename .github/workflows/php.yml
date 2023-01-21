@@ -44,7 +44,7 @@ jobs:
         run: composer install --prefer-dist --no-progress
 
       - name: Analyse code
-        run: composer analysis
+        run: composer analyse
 
       - name: Run tests
         run: composer test
