@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Quartetcom\StaticAnalysisKit\Command;
 
 use Quartetcom\StaticAnalysisKit\PhpCsFixer\Runner as PhpCsFixerRunner;
+use Quartetcom\StaticAnalysisKit\Phpstan\Runner as PhpstanRunner;
 use Quartetcom\StaticAnalysisKit\Rector\Runner as RectorRunner;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -19,6 +20,7 @@ class AnalyseCommand extends Command
     public function __construct(
         private readonly PhpCsFixerRunner $phpCsFixerRunner = new PhpCsFixerRunner(),
         private readonly RectorRunner $rectorRunner = new RectorRunner(),
+        private readonly PhpstanRunner $phpstanRunner = new PhpstanRunner(),
     ) {
         parent::__construct();
     }
@@ -37,6 +39,11 @@ class AnalyseCommand extends Command
                 mode: InputOption::VALUE_NONE,
                 description: 'Runs an analysis without rector enabled.',
             )
+            ->addOption(
+                'no-phpstan',
+                mode: InputOption::VALUE_NONE,
+                description: 'Runs an analysis without phpstan enabled.',
+            )
         ;
     }
 
@@ -46,6 +53,7 @@ class AnalyseCommand extends Command
 
         $noRisky = (bool) $input->getOption('no-risky');
         $noRector = (bool) $input->getOption('no-rector');
+        $noPhpstan = (bool) $input->getOption('no-phpstan');
 
         if (($exitCode = $this->phpCsFixer($io, $noRisky)) !== 0) {
             return $exitCode;
@@ -54,6 +62,12 @@ class AnalyseCommand extends Command
         $io->newLine(2);
 
         if (($exitCode = $this->rector($io, $noRector)) !== 0) {
+            return $exitCode;
+        }
+
+        $io->newLine(2);
+
+        if (($exitCode = $this->phpstan($io, $noPhpstan)) !== 0) {
             return $exitCode;
         }
 
@@ -76,15 +90,33 @@ class AnalyseCommand extends Command
 
     private function rector(SymfonyStyle $io, bool $noRector): int
     {
-        $io->title('rector');
+        $io->title('Running rector');
 
         if ($noRector) {
             $io->warning([
                 'Analysing with rector disabled is not recommended.',
                 'Your configured CI may fail if you commit without analysing fully.',
             ]);
+
+            return 0;
         }
 
         return $this->rectorRunner->run(['--dry-run']);
+    }
+
+    private function phpstan(SymfonyStyle $io, bool $noPhpstan): int
+    {
+        $io->title('Running PHPStan');
+
+        if ($noPhpstan) {
+            $io->warning([
+                'Analysing with phpstan disabled is not recommended.',
+                'Your configured CI may fail if you commit without analysing fully.',
+            ]);
+
+            return 0;
+        }
+
+        return $this->phpstanRunner->run();
     }
 }

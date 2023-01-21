@@ -91,6 +91,10 @@ class FixCommand extends Command
             if (!$io->confirm('Are you sure you want to continue?')) {
                 return 1;
             }
+        } else {
+            $io->text('Skipped. (If you want to use rector, run again with `--rector` flag.)');
+
+            return 0;
         }
 
         return $this->rectorRunner->run();

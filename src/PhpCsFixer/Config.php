@@ -9,6 +9,9 @@ use PhpCsFixer\ConfigInterface;
 
 class Config extends BaseConfig
 {
+    /**
+     * @var array<string, array<string, mixed>|bool>
+     */
     public array $normalRules = [
         '@PSR12' => true,
         '@PHP81Migration' => true,
@@ -43,6 +46,9 @@ class Config extends BaseConfig
         'yoda_style' => false,
     ];
 
+    /**
+     * @var array<string, array<string, mixed>|bool>
+     */
     public array $riskyRules = [
         '@PHP80Migration:risky' => true,
         '@PHPUnit84Migration:risky' => true,
@@ -70,16 +76,22 @@ class Config extends BaseConfig
         );
     }
 
+    /**
+     * @param array<string, array<string, mixed>|bool> $rules
+     */
     public function addRules(array $rules): static
     {
-        $this->normalRules[] = $rules;
+        $this->normalRules = [...$this->normalRules, ...$rules];
 
         return $this;
     }
 
+    /**
+     * @param array<string, array<string, mixed>|bool> $rules
+     */
     public function addRiskyRules(array $rules): static
     {
-        $this->riskyRules[] = $rules;
+        $this->riskyRules = [...$this->riskyRules, ...$rules];
 
         return $this;
     }
