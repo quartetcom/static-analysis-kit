@@ -5,13 +5,15 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Symfony\Component\Console\Application;
 use Quartetcom\StaticAnalysisKit\Command\AnalyseCommand;
 use Quartetcom\StaticAnalysisKit\Command\FixCommand;
+use Quartetcom\StaticAnalysisKit\Command\InstallCommand;
+use Symfony\Component\Console\Application;
 
 $app = new Application('Static Analysis Kit for PHP');
 $app->add(new AnalyseCommand());
 $app->add(new FixCommand());
+$app->add(new InstallCommand());
 
 /** @noinspection PhpUnhandledExceptionInspection */
 $app->run();
