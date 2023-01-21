@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Quartetcom\StaticAnalysisKit\PhpCsFixer;
 
+use Quartetcom\StaticAnalysisKit\ProcessTtyTrait;
 use Symfony\Component\Process\Process;
 
 class Runner
 {
+    use ProcessTtyTrait;
+
     /**
      * @param list<string> $command
      */
@@ -46,10 +49,7 @@ class Runner
 
         file_put_contents($configPath, $config);
 
-        $exitCode = (new Process([...$this->command, ...$additionalArguments]))
-            ->setTty(true)
-            ->run()
-        ;
+        $exitCode = $this->runInTtyOrFallback(new Process([...$this->command, ...$additionalArguments]));
 
         @unlink($configPath);
 

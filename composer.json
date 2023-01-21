@@ -29,14 +29,18 @@
     "scripts": {
         "analyse": "static-analysis-kit analyse",
         "fix": "static-analysis-kit fix",
+        "fix:all": "static-analysis-kit fix --risky --rector",
         "fix:rector": "static-analysis-kit fix --rector",
+        "fix:risky": "static-analysis-kit fix --risky",
         "test": "# To run your tests using this command, you must define your test script in composer.json.",
         "post-autoload-dump": "[ -f './vendor/bin/static-analysis-kit' ] || ln -s $(pwd)/bin/static-analysis-kit ./vendor/bin/static-analysis-kit"
     },
     "scripts-descriptions": {
         "analyse": "Analyses code in this project fully.",
         "fix": "Tries to fix code in this project automatically.",
+        "fix:all": "Tries to fix code in this project automatically fully.",
         "fix:rector": "Tries to fix code in this project automatically with rector enabled.",
+        "fix:risky": "Tries to fix code in this project automatically with risky rules.",
         "test": "Runs the tests."
     },
     "config": {

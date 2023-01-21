@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Quartetcom\StaticAnalysisKit\Rector;
 
+use Quartetcom\StaticAnalysisKit\ProcessTtyTrait;
 use Symfony\Component\Process\Process;
 
 class Runner
 {
+    use ProcessTtyTrait;
+
     /**
      * @param list<string> $command
      */
@@ -21,9 +24,6 @@ class Runner
      */
     public function run(array $additionalArguments = []): int
     {
-        return (new Process([...$this->command, ...$additionalArguments]))
-            ->setTty(true)
-            ->run()
-        ;
+        return $this->runInTtyOrFallback(new Process([...$this->command, ...$additionalArguments]));
     }
 }
