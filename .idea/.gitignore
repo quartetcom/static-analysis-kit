@@ -7,7 +7,7 @@
 /dataSources/
 /dataSources.local.xml
 
-*.xml
+/*.xml
 !modules.xml
 !php.xml
 !vcs.xml
