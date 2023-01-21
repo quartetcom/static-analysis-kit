@@ -18,7 +18,7 @@ class Runner
     /**
      * @param list<string> $additionalArguments
      */
-    public function run(bool $risky, array $additionalArguments): int
+    public function run(bool $risky, array $additionalArguments = []): int
     {
         $distConfigPath = $this->distConfigPath;
         $configPath = $this->configPath;

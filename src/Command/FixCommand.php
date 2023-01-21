@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Quartetcom\StaticAnalysisKit\Command;
 
-use Quartetcom\StaticAnalysisKit\PhpCsFixer\Runner;
+use Quartetcom\StaticAnalysisKit\PhpCsFixer\Runner as PhpCsFixerRunner;
+use Quartetcom\StaticAnalysisKit\Rector\Runner as RectorRunner;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,7 +17,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class FixCommand extends Command
 {
     public function __construct(
-        private readonly Runner $runner = new Runner(),
+        private readonly PhpCsFixerRunner $phpCsFixerRunner = new PhpCsFixerRunner(),
+        private readonly RectorRunner $rectorRunner = new RectorRunner(),
     ) {
         parent::__construct();
     }
@@ -49,12 +51,18 @@ class FixCommand extends Command
             return $exitCode;
         }
 
+        $io->newLine(2);
+
+        if (($exitCode = $this->rector($io, $rector)) !== 0) {
+            return $exitCode;
+        }
+
         return 0;
     }
 
     private function phpCsFixer(SymfonyStyle $io, bool $risky): int
     {
-        $io->title('Running php-cs-fixer '.($risky ? '(RISKY)' : ''));
+        $io->title('Running php-cs-fixer');
 
         if ($risky) {
             $io->warning([
@@ -67,6 +75,24 @@ class FixCommand extends Command
             }
         }
 
-        return $this->runner->run($risky, []);
+        return $this->phpCsFixerRunner->run($risky);
+    }
+
+    private function rector(SymfonyStyle $io, bool $rector): int
+    {
+        $io->title('Running rector');
+
+        if ($rector) {
+            $io->warning([
+                'Automatically fix with rector enabled may cause a code breaking.',
+                'You must confirm the changes are correct after run.',
+            ]);
+
+            if (!$io->confirm('Are you sure you want to continue?')) {
+                return 1;
+            }
+        }
+
+        return $this->rectorRunner->run();
     }
 }

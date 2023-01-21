@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Quartetcom\StaticAnalysisKit\Command;
 
-use Quartetcom\StaticAnalysisKit\PhpCsFixer\Runner;
+use Quartetcom\StaticAnalysisKit\PhpCsFixer\Runner as PhpCsFixerRunner;
+use Quartetcom\StaticAnalysisKit\Rector\Runner as RectorRunner;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,7 +17,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class AnalyseCommand extends Command
 {
     public function __construct(
-        private readonly Runner $runner = new Runner(),
+        private readonly PhpCsFixerRunner $phpCsFixerRunner = new PhpCsFixerRunner(),
+        private readonly RectorRunner $rectorRunner = new RectorRunner(),
     ) {
         parent::__construct();
     }
@@ -49,13 +51,40 @@ class AnalyseCommand extends Command
             return $exitCode;
         }
 
+        $io->newLine(2);
+
+        if (($exitCode = $this->rector($io, $noRector)) !== 0) {
+            return $exitCode;
+        }
+
         return 0;
     }
 
     private function phpCsFixer(SymfonyStyle $io, bool $noRisky): int
     {
-        $io->title('Running php-cs-fixer '.($noRisky ? '(no risky)' : ''));
+        $io->title('Running php-cs-fixer');
 
-        return $this->runner->run(!$noRisky, ['--dry-run']);
+        if ($noRisky) {
+            $io->warning([
+                'Analysing without risky rules is not recommended.',
+                'Your configured CI may fail if you commit without analysing fully.',
+            ]);
+        }
+
+        return $this->phpCsFixerRunner->run(!$noRisky, ['--dry-run']);
+    }
+
+    private function rector(SymfonyStyle $io, bool $noRector): int
+    {
+        $io->title('rector');
+
+        if ($noRector) {
+            $io->warning([
+                'Analysing with rector disabled is not recommended.',
+                'Your configured CI may fail if you commit without analysing fully.',
+            ]);
+        }
+
+        return $this->rectorRunner->run(['--dry-run']);
     }
 }
