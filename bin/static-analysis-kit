@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Quartetcom\StaticAnalysisKit\Command\AnalyseCommand;
+use Quartetcom\StaticAnalysisKit\Command\FixCommand;
+
+$app = new Application('Static Analysis Kit for PHP');
+$app->add(new AnalyseCommand());
+$app->add(new FixCommand());
+
+/** @noinspection PhpUnhandledExceptionInspection */
+$app->run();
