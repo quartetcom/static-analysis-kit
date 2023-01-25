@@ -2,7 +2,7 @@
     "name": "quartetcom/static-analysis-kit",
     "description": "Strict and modern kit to optimise the codebase defensively.",
     "type": "library",
-    "license": "proprietary",
+    "license": "MIT",
     "authors": [
         {
             "name": "Naoki Ikeguchi (s6n.jp)",
