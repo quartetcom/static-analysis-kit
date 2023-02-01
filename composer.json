@@ -24,7 +24,7 @@
         }
     },
     "bin": [
-        "./static-analysis-kit"
+        "./bin/static-analysis-kit"
     ],
     "scripts": {
         "analyse": "static-analysis-kit analyse",
