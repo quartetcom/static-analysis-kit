@@ -15,7 +15,7 @@
         "friendsofphp/php-cs-fixer": "^3.13",
         "phpstan/phpstan": "^1.9",
         "rector/rector": "^0.15.10",
-        "symfony/console": "^6",
+        "symfony/console": "^6.2",
         "symfony/process": "^6.2"
     },
     "autoload": {
@@ -24,7 +24,7 @@
         }
     },
     "bin": [
-        "./static-analysis-kit"
+        "./bin/static-analysis-kit"
     ],
     "scripts": {
         "analyse": "static-analysis-kit analyse",
