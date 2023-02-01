@@ -11,7 +11,7 @@ composer require --dev quartetcom/static-analysis-kit:~8.1
 ./vendor/bin/static-analysis-kit install
 ```
 
-> **info**
+> **Note**  
 > `~8.1` の部分は利用する PHP バージョンによって変えてください．
 > 詳しくは [バージョンについて](#-バージョンについて) を参照してください．
 
