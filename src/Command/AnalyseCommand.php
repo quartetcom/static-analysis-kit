@@ -55,12 +55,6 @@ class AnalyseCommand extends Command
         $noRector = (bool) $input->getOption('no-rector');
         $noPhpstan = (bool) $input->getOption('no-phpstan');
 
-        if (($exitCode = $this->phpCsFixer($io, $noRisky)) !== 0) {
-            return $exitCode;
-        }
-
-        $io->newLine(2);
-
         if (($exitCode = $this->rector($io, $noRector)) !== 0) {
             return $exitCode;
         }
@@ -68,6 +62,12 @@ class AnalyseCommand extends Command
         $io->newLine(2);
 
         if (($exitCode = $this->phpstan($io, $noPhpstan)) !== 0) {
+            return $exitCode;
+        }
+
+        $io->newLine(2);
+
+        if (($exitCode = $this->phpCsFixer($io, $noRisky)) !== 0) {
             return $exitCode;
         }
 
