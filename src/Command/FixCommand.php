@@ -47,13 +47,13 @@ class FixCommand extends Command
         $risky = (bool) $input->getOption('risky');
         $rector = (bool) $input->getOption('rector');
 
-        if (($exitCode = $this->phpCsFixer($io, $risky)) !== 0) {
+        if (($exitCode = $this->rector($io, $rector)) !== 0) {
             return $exitCode;
         }
 
         $io->newLine(2);
 
-        if (($exitCode = $this->rector($io, $rector)) !== 0) {
+        if (($exitCode = $this->phpCsFixer($io, $risky)) !== 0) {
             return $exitCode;
         }
 
