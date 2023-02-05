@@ -115,6 +115,10 @@ class InstallCommand extends Command
             'post-autoload-dump',
         ];
 
+        $keep = [
+            'test',
+        ];
+
         if (($sourceFile = file_get_contents($source)) === false) {
             throw new \RuntimeException("Failed to open file '{$sourceFile}'.");
         }
@@ -135,6 +139,11 @@ class InstallCommand extends Command
             }
 
             foreach ($sourceJson[$group] as $key => $value) {
+                // Keep 'test' script if it already exists
+                if (isset($targetJson[$group][$key]) && \in_array($key, $keep, true)) {
+                    continue;
+                }
+
                 if (!\in_array($key, $ignore, true)) {
                     $targetJson[$group][$key] = $value;
                 }
