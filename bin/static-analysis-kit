@@ -3,7 +3,15 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/../vendor/autoload.php';
+try {
+    @require_once __DIR__ . '/../vendor/autoload.php';
+} catch (\Throwable) {
+    try {
+        @require_once __DIR__ . '/../../autoload.php';
+    } catch (\Throwable) {
+        @require_once './vendor/autoload.php';
+    }
+}
 
 use Quartetcom\StaticAnalysisKit\Command\AnalyseCommand;
 use Quartetcom\StaticAnalysisKit\Command\FixCommand;

@@ -1,34 +1,34 @@
 # 🛡️ static-analysis-kit
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/quartetcom/static-analysis-kit/tree/master.svg?style=shield&circle-token=e664f9de38860a84eb9e96c47768c41682471683)](https://dl.circleci.com/status-badge/redirect/gh/quartetcom/static-analysis-kit/tree/master)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/quartetcom/static-analysis-kit/tree/8.1.svg?style=shield&circle-token=e664f9de38860a84eb9e96c47768c41682471683)](https://dl.circleci.com/status-badge/redirect/gh/quartetcom/static-analysis-kit/tree/master)
 [![GitHub Actions](https://github.com/quartetcom/static-analysis-kit/actions/workflows/php.yml/badge.svg)](https://github.com/quartetcom/static-analysis-kit/actions/workflows/php.yml)
 
-コードベースを防衛的に最適化するための堅牢でモダンなキット．
+Strict and modern kit to optimise the codebase defensively.
 
-## 📦 インストール
+## 📦 Installation
 
 ```shell
 composer require --dev quartetcom/static-analysis-kit:~8.1
 ./vendor/bin/static-analysis-kit install
 ```
 
-> **info**
-> `~8.1` の部分は利用する PHP バージョンによって変えてください．
-> 詳しくは [バージョンについて](#-バージョンについて) を参照してください．
+> **Note**  
+> Replace `~8.1` with the PHP version you want to use.
+> Refer [Versioning](#-versioning) for details.
 
-質問に従うと自動的にプロジェクトが最適な設定になります．
+The project will be automatically optimised by answering the questions.
 
-## 🔖 バージョンについて
+## 🔖 Versioning
 
-このパッケージのバージョンはサポートする PHP のそれに追従します．
-たとえば PHP 8.1 のプロジェクトに使いたい場合は `~8.1` の範囲のものを使ってください．
+Version of this package follows the PHP version that which is supported.
+For example, if you want to use in a PHP 8.1 project, use in range of `~8.1`．
 
-## ✅ 開発フロー
+## ✅ Development Flow
 
-1. コードを変更する
-2. PhpStorm で Reformat Code を行う (⌘L)
-3. 波線のついたエラーがないことを確認する (スクロールバーのところでハイライトされる)
-4. `composer analyse` を実行する
-5. フォーマットに関する問題は `composer fix` で解決できる
-6. それでも治らない問題はコードが悪いのでエラーに沿って解決する
-   (`composer fix:risky` や `composer fix:rector` で解決を試みることもできるが，これは既存のコードのビヘイビアを破壊する可能性が あるので差分をよく確認すること)
-7. `composer analyse` のエラーがないことを確認してコミットする
+1. Change code
+2. Run "Reformat Code" (%L) in PhpStorm
+3. Confirm there are no errors (will be highlighted on the scroll bar)
+4. Run `composer analyse`
+5. Problems about formatting can be resolved by `composer fix`
+6. The remaining problems should caused by the code, so fix them manually
+   (You can run `composer fix:risky` or `composer fix:rector` to resolve them, but this causes code breaks; be careful of the diff after run)
+7. Commit after confirmed there are no errors by running `composer analyse`
