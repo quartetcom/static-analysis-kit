@@ -13,6 +13,11 @@ class SymfonyFlavor implements FlavorInterface
         return new self();
     }
 
+    public function name(): string
+    {
+        return 'Symfony';
+    }
+
     public function devDependencies(): array
     {
         return [

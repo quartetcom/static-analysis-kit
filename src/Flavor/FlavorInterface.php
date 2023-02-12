@@ -8,6 +8,8 @@ interface FlavorInterface
 {
     public static function create(): self;
 
+    public function name(): string;
+
     /**
      * @return array<string, null|string>
      */

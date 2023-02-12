@@ -26,6 +26,17 @@ class FlavorAggregate
     }
 
     /**
+     * @return string[]
+     */
+    public function names(): array
+    {
+        return array_map(
+            fn (FlavorInterface $flavor): string => $flavor->name(),
+            $this->flavors,
+        );
+    }
+
+    /**
      * @return array<string, null|string>
      */
     public function devDependencies(): array

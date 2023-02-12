@@ -182,18 +182,16 @@ class InstallCommand extends Command
             return;
         }
 
+        $aggregate = FlavorAggregate::fromClassNames($flavors);
         if (!$io->confirm(
-            'We found the project flavor: ' . implode(', ', $flavors)
+            'We found the project flavor: ' . implode(', ', $aggregate->names())
                 . '. Do you want to install additional dependencies for the flavor(s)?',
         )) {
             return;
         }
 
-        $aggregate = FlavorAggregate::fromClassNames($flavors);
-        $dependencies = $aggregate->devDependencies();
-
         $requirements = [];
-        foreach ($dependencies as $dependency => $version) {
+        foreach ($aggregate->devDependencies() as $dependency => $version) {
             $requirements[] = $version === null ? $dependency : "{$dependency}:{$version}";
         }
 
