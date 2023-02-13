@@ -27,11 +27,11 @@
         "./bin/static-analysis-kit"
     ],
     "scripts": {
-        "analyse": "static-analysis-kit analyse",
-        "fix": "static-analysis-kit fix",
-        "fix:all": "static-analysis-kit fix --risky --rector",
-        "fix:rector": "static-analysis-kit fix --rector",
-        "fix:risky": "static-analysis-kit fix --risky",
+        "analyse": "@php static-analysis-kit analyse",
+        "fix": "@php static-analysis-kit fix",
+        "fix:all": "@php static-analysis-kit fix --risky --rector",
+        "fix:rector": "@php static-analysis-kit fix --rector",
+        "fix:risky": "@php static-analysis-kit fix --risky",
         "test": "# To run your tests using this command, you must define your test script in composer.json.",
         "post-autoload-dump": "[ -f './vendor/bin/static-analysis-kit' ] || ln -s $(pwd)/bin/static-analysis-kit ./vendor/bin/static-analysis-kit"
     },
