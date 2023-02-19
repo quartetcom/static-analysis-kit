@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Quartetcom\StaticAnalysisKit\Command;
 
+use Quartetcom\StaticAnalysisKit\Composer\Runner as ComposerRunner;
+use Quartetcom\StaticAnalysisKit\Flavor\DetectorAggregate;
+use Quartetcom\StaticAnalysisKit\Flavor\FlavorAggregate;
+use Quartetcom\StaticAnalysisKit\Flavor\Symfony\SymfonyDetector;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -13,6 +17,17 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand('install')]
 class InstallCommand extends Command
 {
+    use InstallFileTrait;
+
+    public function __construct(
+        private readonly DetectorAggregate $flavorDetector = new DetectorAggregate([
+            new SymfonyDetector(),
+        ]),
+        private readonly ComposerRunner $composerRunner = new ComposerRunner(),
+    ) {
+        parent::__construct();
+    }
+
     protected function configure(): void
     {
         $this
@@ -47,6 +62,8 @@ class InstallCommand extends Command
             && $io->confirm('Are you using GitHub Actions? We will add .github/workflows/php.yml for you.')) {
             $this->installGitHubActionsWorkflow($io);
         }
+
+        $this->installFlavors($io);
 
         if ($io->confirm(
             'Last question. Do you want to run analysis using simple commands? We will modify your composer.json for you.',
@@ -161,24 +178,29 @@ class InstallCommand extends Command
         ]);
     }
 
-    private function installFile(string $path, ?SymfonyStyle $io = null, bool $confirmOverride = false): void
+    private function installFlavors(SymfonyStyle $io): void
     {
-        $source = __DIR__ . '/../..' . $path;
-        $target = '.' . $path;
-
-        if (!file_exists($directory = \dirname($target))) {
-            mkdir($directory);
-        } elseif (!is_dir($directory)) {
-            throw new \RuntimeException("Path '{$directory}' is not a directory.");
-        }
-
-        if ($confirmOverride && file_exists($target)
-            && !$io?->confirm("File {$target} already exists. Are you sure you want to overwrite?")) {
-            $io?->text("Skipped installing '{$target}'.");
-
+        if (($flavors = $this->flavorDetector->detectAll('.')) === []) {
             return;
         }
 
-        file_put_contents($target, file_get_contents($source));
+        $aggregate = FlavorAggregate::fromClassNames($flavors);
+        if (!$io->confirm(
+            'We found the project flavor: ' . implode(', ', $aggregate->names())
+                . '. Do you want to install additional dependencies for the flavor(s)?',
+        )) {
+            return;
+        }
+
+        $requirements = [];
+        foreach ($aggregate->devDependencies() as $dependency => $version) {
+            $requirements[] = $version === null ? $dependency : "{$dependency}:{$version}";
+        }
+
+        if ($this->composerRunner->run(['require', '--dev', ...$requirements]) === 0) {
+            $io->success('Successfully installed additional dependencies for the flavor(s).');
+        } else {
+            $io->error('Error occurred while running Composer.');
+        }
     }
 }

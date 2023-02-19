@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Quartetcom\StaticAnalysisKit\Rector;
+namespace Quartetcom\StaticAnalysisKit\Composer;
 
 use Quartetcom\StaticAnalysisKit\ProcessTtyTrait;
 use Symfony\Component\Process\Process;
@@ -15,7 +15,7 @@ class Runner
      * @param list<string> $command
      */
     public function __construct(
-        private readonly array $command = ['php', './vendor/bin/rector', 'process'],
+        private readonly array $command = ['composer'],
     ) {
     }
 
