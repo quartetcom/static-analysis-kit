@@ -43,7 +43,7 @@ class UpdateCommand extends Command
         $configPath = $this->pathTarget('/.static-analysis-kit.json');
 
         /** @var array{ignore?: list<string>} $config */
-        $config = json_decode(file_get_contents($configPath) ?: '{}', true, flags: \JSON_THROW_ON_ERROR);
+        $config = json_decode(@file_get_contents($configPath) ?: '{}', true, flags: \JSON_THROW_ON_ERROR);
 
         /** @var list<string> $ignore */
         $ignore = $config['ignore'] ?? [];
@@ -71,7 +71,7 @@ class UpdateCommand extends Command
         }
 
         $config['ignore'] = $ignore;
-        file_put_contents($configPath, json_encode($config, flags: \JSON_THROW_ON_ERROR));
+        file_put_contents($configPath, json_encode($config, flags: \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT));
 
         $io->success('Your configuration files looks shine!');
 
