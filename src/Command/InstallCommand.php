@@ -17,6 +17,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand('install')]
 class InstallCommand extends Command
 {
+    use InstallFileTrait;
+
     public function __construct(
         private readonly DetectorAggregate $flavorDetector = new DetectorAggregate([
             new SymfonyDetector(),
@@ -200,26 +202,5 @@ class InstallCommand extends Command
         } else {
             $io->error('Error occurred while running Composer.');
         }
-    }
-
-    private function installFile(string $path, ?SymfonyStyle $io = null, bool $confirmOverride = false): void
-    {
-        $source = __DIR__ . '/../..' . $path;
-        $target = '.' . $path;
-
-        if (!file_exists($directory = \dirname($target))) {
-            mkdir($directory);
-        } elseif (!is_dir($directory)) {
-            throw new \RuntimeException("Path '{$directory}' is not a directory.");
-        }
-
-        if ($confirmOverride && file_exists($target)
-            && !$io?->confirm("File {$target} already exists. Are you sure you want to overwrite?")) {
-            $io?->text("Skipped installing '{$target}'.");
-
-            return;
-        }
-
-        file_put_contents($target, file_get_contents($source));
     }
 }
