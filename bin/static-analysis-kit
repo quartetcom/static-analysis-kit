@@ -13,15 +13,7 @@ try {
     }
 }
 
-use Quartetcom\StaticAnalysisKit\Command\AnalyseCommand;
-use Quartetcom\StaticAnalysisKit\Command\FixCommand;
-use Quartetcom\StaticAnalysisKit\Command\InstallCommand;
-use Symfony\Component\Console\Application;
-
-$app = new Application('Static Analysis Kit for PHP');
-$app->add(new AnalyseCommand());
-$app->add(new FixCommand());
-$app->add(new InstallCommand());
+use Quartetcom\StaticAnalysisKit\Application;
 
 /** @noinspection PhpUnhandledExceptionInspection */
-$app->run();
+$app = (new Application())->run();
