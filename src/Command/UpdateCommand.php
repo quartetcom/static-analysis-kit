@@ -33,9 +33,20 @@ class UpdateCommand extends Command
         ;
     }
 
+    /**
+     * @throws \JsonException
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
+        $configPath = $this->pathTarget('/.static-analysis-kit.json');
+
+        /** @var array{ignore?: list<string>} $config */
+        $config = json_decode(file_get_contents($configPath) ?: '{}', true, flags: \JSON_THROW_ON_ERROR);
+
+        /** @var list<string> $ignore */
+        $ignore = $config['ignore'] ?? [];
 
         foreach (self::$files as $path) {
             if (!file_exists($target = $this->pathTarget($path))) {
@@ -46,12 +57,21 @@ class UpdateCommand extends Command
                 continue;
             }
 
+            if (\in_array($path, $ignore, true)) {
+                continue;
+            }
+
             if (!$io->confirm("File '{$path}' is updated in static-analysis-kit. Do you want to update yours too?")) {
+                $ignore[] = $path;
+
                 continue;
             }
 
             $this->installFile($path, $io);
         }
+
+        $config['ignore'] = $ignore;
+        file_put_contents($configPath, json_encode($config, flags: \JSON_THROW_ON_ERROR));
 
         $io->success('Your configuration files looks shine!');
 
