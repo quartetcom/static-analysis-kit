@@ -6,6 +6,7 @@ namespace Quartetcom\StaticAnalysisKit\Composer;
 
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Quartetcom\StaticAnalysisKit\Application;
+use Symfony\Component\Console\Input\StringInput;
 
 class EventSubscriber implements EventSubscriberInterface
 {
@@ -20,8 +21,8 @@ class EventSubscriber implements EventSubscriberInterface
     public function onUpdate(): void
     {
         $this->app
-            ->setDefaultCommand('update')
-            ->run()
+            ->setDefaultCommand('update', true)
+            ->run(new StringInput(''))
         ;
     }
 
