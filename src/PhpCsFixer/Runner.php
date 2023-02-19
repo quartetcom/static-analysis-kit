@@ -49,7 +49,7 @@ class Runner
 
         file_put_contents($configPath, $config);
 
-        $exitCode = $this->runInTtyOrFallback(new Process([...$this->command, ...$additionalArguments]));
+        $exitCode = $this->runInTtyOrFallback(new Process([...$this->command, ...$additionalArguments], timeout: null));
 
         @unlink($configPath);
 

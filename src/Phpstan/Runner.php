@@ -24,6 +24,6 @@ class Runner
      */
     public function run(array $additionalArguments = []): int
     {
-        return $this->runInTtyOrFallback(new Process([...$this->command, ...$additionalArguments]));
+        return $this->runInTtyOrFallback(new Process([...$this->command, ...$additionalArguments], timeout: null));
     }
 }
