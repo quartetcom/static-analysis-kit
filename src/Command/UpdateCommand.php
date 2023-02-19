@@ -71,7 +71,10 @@ class UpdateCommand extends Command
         }
 
         $config['ignore'] = $ignore;
-        file_put_contents($configPath, json_encode($config, flags: \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT));
+        file_put_contents(
+            $configPath,
+            json_encode($config, flags: \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES),
+        );
 
         $io->success('Your configuration files looks shine!');
 
