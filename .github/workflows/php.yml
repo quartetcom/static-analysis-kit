@@ -30,6 +30,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-php-${{ matrix.php }}-
 
+      - name: Persist analyser caches
+        id: analyser-cache
+        uses: actions/cache@v3
+        with:
+          path: .cache
+          key: ${{ runner.os }}-analyser-${{ matrix.php }}-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-analyser-${{ matrix.php }}-
+
       - name: Install dependencies
         if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress
