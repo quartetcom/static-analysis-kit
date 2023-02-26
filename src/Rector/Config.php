@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Quartetcom\StaticAnalysisKit\Rector;
 
+use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
 use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\Php81\Rector\ClassConst\FinalizePublicClassConstantRector;
@@ -11,6 +12,7 @@ use Rector\PHPUnit\Rector\Class_\AddProphecyTraitRector;
 use Rector\Set\ValueObject\SetList;
 use Rector\Symfony\Set\SensiolabsSetList;
 use Rector\Symfony\Set\SymfonySetList;
+use RectorPrefix202302\OndraM\CiDetector\CiDetector;
 
 class Config
 {
@@ -42,5 +44,14 @@ class Config
 
         $rectorConfig->importNames();
         $rectorConfig->importShortClasses(false);
+
+        $rectorConfig->cacheClass(FileCacheStorage::class);
+        $rectorConfig->cacheDirectory('./.cache/rector');
+
+        if ((new CiDetector())->isCiDetected()) {
+            // We are experiencing Rector fails only on CI in larger projects, so disabling parallelism by default.
+            // You can override to enable it by using `$rectorConfig->parallel();`.
+            $rectorConfig->disableParallel();
+        }
     }
 }
