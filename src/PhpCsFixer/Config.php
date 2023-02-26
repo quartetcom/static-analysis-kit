@@ -66,6 +66,8 @@ class Config extends BaseConfig
     {
         parent::__construct($name);
 
+        $this->setCacheFile('./.cache/php-cs-fixer.cache');
+
         // Returns a ruleset with risky rules when loading .php-cs-fixer.dist.php directly for editor integrations.
         $this->configure(useRiskyRules: true);
     }

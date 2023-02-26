@@ -15,13 +15,7 @@ class Runner
      * @param list<string> $command
      */
     public function __construct(
-        private readonly array $command = [
-            'php',
-            './vendor/bin/php-cs-fixer',
-            'fix',
-            '-vv',
-            '--cache-file=./.cache/php-cs-fixer.cache',
-        ],
+        private readonly array $command = ['php', './vendor/bin/php-cs-fixer', 'fix', '-vv'],
         private readonly string $distConfigPath = './.php-cs-fixer.dist.php',
         private readonly string $configPath = './.php-cs-fixer.php',
     ) {
