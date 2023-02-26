@@ -12,6 +12,11 @@ jobs:
       - php/install-composer
       - php/install-packages
 
+      - restore_cache:
+          keys:
+            - v1-analysis-{{ checksum "composer.lock" }}
+            - v1-analysis-
+
       - run: rm -f ./composer-setup.php || true
       - run: composer analyse
       - run: composer test
