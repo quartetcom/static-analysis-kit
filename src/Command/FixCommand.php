@@ -16,6 +16,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand('fix')]
 class FixCommand extends Command
 {
+    use CacheDirectoryTrait;
+
     public function __construct(
         private readonly PhpCsFixerRunner $phpCsFixerRunner = new PhpCsFixerRunner(),
         private readonly RectorRunner $rectorRunner = new RectorRunner(),
@@ -46,6 +48,8 @@ class FixCommand extends Command
 
         $risky = (bool) $input->getOption('risky');
         $rector = (bool) $input->getOption('rector');
+
+        $this->ensureCacheDirectory();
 
         if (($exitCode = $this->rector($io, $rector)) !== 0) {
             return $exitCode;
