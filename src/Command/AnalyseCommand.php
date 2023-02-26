@@ -17,6 +17,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand('analyse')]
 class AnalyseCommand extends Command
 {
+    use CacheDirectoryTrait;
+
     public function __construct(
         private readonly PhpCsFixerRunner $phpCsFixerRunner = new PhpCsFixerRunner(),
         private readonly RectorRunner $rectorRunner = new RectorRunner(),
@@ -54,6 +56,8 @@ class AnalyseCommand extends Command
         $noRisky = (bool) $input->getOption('no-risky');
         $noRector = (bool) $input->getOption('no-rector');
         $noPhpstan = (bool) $input->getOption('no-phpstan');
+
+        $this->ensureCacheDirectory();
 
         if (($exitCode = $this->rector($io, $noRector)) !== 0) {
             return $exitCode;
