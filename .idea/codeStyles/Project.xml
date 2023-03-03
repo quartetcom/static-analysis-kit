@@ -36,6 +36,7 @@
       <option name="SPACE_BEFORE_CLOSURE_LEFT_PARENTHESIS" value="false" />
       <option name="FORCE_SHORT_DECLARATION_ARRAY_STYLE" value="true" />
       <option name="NEW_LINE_AFTER_PHP_OPENING_TAG" value="true" />
+      <option name="FORCE_EMPTY_METHODS_IN_ONE_LINE" value="true" />
       <option name="NULL_TYPE_POSITION" value="IN_THE_BEGINNING" />
       <option name="MULTILINE_CHAINED_CALLS_SEMICOLON_ON_NEW_LINE" value="true" />
       <option name="NAMESPACE_BRACE_STYLE" value="2" />
