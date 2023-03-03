@@ -46,6 +46,8 @@ class Runner
                 \$distConfig = @include_once('{$distConfigPath}');
                 if (\$distConfig) {
                     \$distConfig(\$ecsConfig);
+                } else {
+                    Config::use(\$ecsConfig);
                 }
             };
 

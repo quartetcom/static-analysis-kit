@@ -78,6 +78,7 @@ class InstallCommand extends Command
     {
         $files = [
             '/.php-cs-fixer.dist.php',
+            '/ecs.php',
             '/phpstan.neon',
             '/rector.php',
         ];

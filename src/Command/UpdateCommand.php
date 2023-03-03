@@ -20,6 +20,7 @@ class UpdateCommand extends Command
      */
     private static array $files = [
         '/.php-cs-fixer.dist.php',
+        '/ecs.php',
         '/phpstan.neon',
         '/rector.php',
         '/.idea/codeStyles/codeStyleConfig.xml',
