@@ -43,7 +43,7 @@ class Runner
                     Config::useRisky(\$ecsConfig);
                 }
 
-                \$distConfig = @include_once('{$distConfigPath}');
+                \$distConfig = @include('{$distConfigPath}');
                 if (\$distConfig) {
                     \$distConfig(\$ecsConfig);
                 } else {
