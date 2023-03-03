@@ -13,11 +13,12 @@
     "require": {
         "php": "^8.1",
         "composer-plugin-api": "*",
-        "friendsofphp/php-cs-fixer": "^3.14.2",
+        "friendsofphp/php-cs-fixer": "^3.14.4",
         "phpstan/phpstan": "^1.10.3",
-        "rector/rector": "^0.15.18",
+        "rector/rector": "^0.15.19",
         "symfony/console": "^5.4|^6",
-        "symfony/process": "^5.4|^6"
+        "symfony/process": "^5.4|^6",
+        "symplify/easy-coding-standard": "^11.2"
     },
     "autoload": {
         "psr-4": {
