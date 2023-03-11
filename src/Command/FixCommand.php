@@ -91,7 +91,7 @@ class FixCommand extends Command
             }
         }
 
-        return $this->ecsRunner->run($risky);
+        return $this->ecsRunner->run($risky, ['--fix']);
     }
 
     private function phpCsFixer(SymfonyStyle $io, bool $risky): int
