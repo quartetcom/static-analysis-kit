@@ -72,6 +72,9 @@ class Config extends BaseConfig
         $this->configure(useRiskyRules: true);
     }
 
+    /**
+     * @param array<string, array<string, mixed>|bool> $rules
+     */
     public function setRules(array $rules): never
     {
         throw new \RuntimeException(
