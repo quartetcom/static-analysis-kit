@@ -7,12 +7,12 @@ Strict and modern kit to optimise the codebase defensively.
 ## 📦 Installation
 
 ```shell
-composer require --dev quartetcom/static-analysis-kit:~8.1
+composer require --dev quartetcom/static-analysis-kit:~8.2
 ./vendor/bin/static-analysis-kit install
 ```
 
 > **Note**  
-> Replace `~8.1` with the PHP version you want to use.
+> Replace `~8.2` with the PHP version you want to use.
 > Refer [Versioning](#-versioning) for details.
 
 The project will be automatically optimised by answering the questions.
@@ -20,7 +20,7 @@ The project will be automatically optimised by answering the questions.
 ## 🔖 Versioning
 
 Version of this package follows the PHP version that which is supported.
-For example, if you want to use in a PHP 8.1 project, use in range of `~8.1`．
+For example, if you want to use in a PHP 8.2 project, use in range of `~8.2`．
 
 ## ✅ Development Flow
 

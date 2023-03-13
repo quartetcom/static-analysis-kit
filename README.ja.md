@@ -7,12 +7,12 @@
 ## 📦 インストール
 
 ```shell
-composer require --dev quartetcom/static-analysis-kit:~8.1
+composer require --dev quartetcom/static-analysis-kit:~8.2
 ./vendor/bin/static-analysis-kit install
 ```
 
 > **Note**  
-> `~8.1` の部分は利用する PHP バージョンによって変えてください．
+> `~8.2` の部分は利用する PHP バージョンによって変えてください．
 > 詳しくは [バージョンについて](#-バージョンについて) を参照してください．
 
 質問に従うと自動的にプロジェクトが最適な設定になります．
@@ -20,7 +20,7 @@ composer require --dev quartetcom/static-analysis-kit:~8.1
 ## 🔖 バージョンについて
 
 このパッケージのバージョンはサポートする PHP のそれに追従します．
-たとえば PHP 8.1 のプロジェクトに使いたい場合は `~8.1` の範囲のものを使ってください．
+たとえば PHP 8.2 のプロジェクトに使いたい場合は `~8.2` の範囲のものを使ってください．
 
 ## ✅ 開発フロー
 
