@@ -49,16 +49,7 @@ class Runner
 
         file_put_contents($configPath, $config);
 
-        $exitCode = $this->runInTtyOrFallback(
-            new Process(
-                [...$this->command, ...$additionalArguments],
-                env: [
-                    // TODO: Delete this after php-cs-fixer supported PHP 8.2 officially
-                    'PHP_CS_FIXER_IGNORE_ENV' => '1',
-                ],
-                timeout: null,
-            ),
-        );
+        $exitCode = $this->runInTtyOrFallback(new Process([...$this->command, ...$additionalArguments], timeout: null));
 
         @unlink($configPath);
 
