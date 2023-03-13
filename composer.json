@@ -39,8 +39,8 @@
         "fix:risky": "@php static-analysis-kit fix --risky",
         "test": "# To run your tests using this command, you must define your test script in composer.json.",
         "post-autoload-dump": [
-            "[ -f './vendor/bin/static-analysis-kit' ] || ln -s $(pwd)/bin/static-analysis-kit ./vendor/bin/static-analysis-kit",
-            "[ -f './vendor/quartetcom/static-analysis-kit' ] || mkdir -p ./vendor/quartetcom && ln -s $(pwd) ./vendor/quartetcom/static-analysis-kit"
+            "[ -L './vendor/bin/static-analysis-kit' ] || ln -s $(pwd)/bin/static-analysis-kit ./vendor/bin/static-analysis-kit",
+            "[ -L './vendor/quartetcom/static-analysis-kit' ] || (mkdir -p ./vendor/quartetcom && ln -s $(pwd) ./vendor/quartetcom/static-analysis-kit)"
         ]
     },
     "scripts-descriptions": {
