@@ -1,5 +1,5 @@
 parameters:
     level: 9
-    tmpDir: ./.cache/phpstan
+    tmpDir: %currentWorkingDirectory%/.cache/phpstan
     bootstrapFiles:
-        - phar://./vendor/php-cs-fixer/shim/php-cs-fixer.phar/vendor/autoload.php
+        - phar://%currentWorkingDirectory%/vendor/php-cs-fixer/shim/php-cs-fixer.phar/vendor/autoload.php
