@@ -18,7 +18,7 @@ class Application extends BaseApplication
 
         $this->add(new AnalyseCommand());
         $this->add(new FixCommand());
-        $this->add(new InstallCommand());
-        $this->add(new UpdateCommand());
+        $this->add($installCommand = new InstallCommand());
+        $this->add(new UpdateCommand($installCommand));
     }
 }
