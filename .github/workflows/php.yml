@@ -1,7 +1,11 @@
 name: php
 
 on:
-  push: ~
+  push:
+    branches:
+      - main
+      - master
+  pull_request: ~
 
 jobs:
   build:
