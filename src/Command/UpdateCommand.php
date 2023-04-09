@@ -27,6 +27,12 @@ class UpdateCommand extends Command
         '/.idea/inspectionProfiles/quartetcom.xml',
     ];
 
+    public function __construct(
+        private readonly InstallCommand $installCommand,
+    ) {
+        parent::__construct();
+    }
+
     protected function configure(): void
     {
         $this
@@ -42,6 +48,10 @@ class UpdateCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $configPath = $this->pathTarget('/.static-analysis-kit.json');
+
+        if (!file_exists($configPath)) {
+            return $this->installCommand->execute($input, $output);
+        }
 
         /** @var array{ignore?: list<string>} $config */
         $config = json_decode(@file_get_contents($configPath) ?: '{}', true, flags: \JSON_THROW_ON_ERROR);
