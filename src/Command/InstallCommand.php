@@ -49,17 +49,18 @@ class InstallCommand extends Command
 
         if ($io->confirm(
             'Are you using using IntelliJ IDEA or PhpStorm? We have a brief configuration for them.',
+            false,
         )) {
             $this->installIntellijSettings($io);
         }
 
         if (!file_exists('./.circleci/config.yml')
-            && $io->confirm('Are you using CircleCI? We will add .circleci/config.yml for you.')) {
+            && $io->confirm('Are you using CircleCI? We will add .circleci/config.yml for you.', false)) {
             $this->installCircleCiWorkflow($io);
         }
 
         if (!file_exists('./.github/workflows/php.yml')
-            && $io->confirm('Are you using GitHub Actions? We will add .github/workflows/php.yml for you.')) {
+            && $io->confirm('Are you using GitHub Actions? We will add .github/workflows/php.yml for you.', false)) {
             $this->installGitHubActionsWorkflow($io);
         }
 
@@ -67,9 +68,12 @@ class InstallCommand extends Command
 
         if ($io->confirm(
             'Last question. Do you want to run analysis using simple commands? We will modify your composer.json for you.',
+            false,
         )) {
             $this->modifyComposerJson($io);
         }
+
+        file_put_contents($this->pathTarget('/.static-analysis-kit.json'), "{}\n");
 
         return 0;
     }

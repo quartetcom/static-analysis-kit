@@ -24,7 +24,7 @@ trait InstallFileTrait
         $target = $this->pathTarget($path);
 
         if (!file_exists($directory = \dirname((string) $target))) {
-            mkdir($directory);
+            mkdir($directory, recursive: true);
         } elseif (!is_dir($directory)) {
             throw new \RuntimeException("Path '{$directory}' is not a directory.");
         }
