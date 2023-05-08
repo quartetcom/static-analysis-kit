@@ -71,6 +71,8 @@ class InstallCommand extends Command
             $this->modifyComposerJson($io);
         }
 
+        file_put_contents($this->pathTarget('/.static-analysis-kit.json'), "{}\n");
+
         return 0;
     }
 
