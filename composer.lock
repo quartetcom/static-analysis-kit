@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4342a5a62b3e2b8167111c43f6ec43a2",
+    "content-hash": "e021f378431f7ff542986048ff0a2890",
     "packages": [
         {
             "name": "php-cs-fixer/shim",
@@ -952,16 +952,16 @@
         },
         {
             "name": "symplify/easy-coding-standard",
-            "version": "11.3.2",
+            "version": "12.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/easy-coding-standard/easy-coding-standard.git",
-                "reference": "d4159e06c0970e71a2a58d350160241e7cb3994b"
+                "reference": "7372622f5d9126ec50b0923d7eb6b778fac575a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/easy-coding-standard/easy-coding-standard/zipball/d4159e06c0970e71a2a58d350160241e7cb3994b",
-                "reference": "d4159e06c0970e71a2a58d350160241e7cb3994b",
+                "url": "https://api.github.com/repos/easy-coding-standard/easy-coding-standard/zipball/7372622f5d9126ec50b0923d7eb6b778fac575a5",
+                "reference": "7372622f5d9126ec50b0923d7eb6b778fac575a5",
                 "shasum": ""
             },
             "require": {
@@ -994,7 +994,7 @@
             ],
             "support": {
                 "issues": "https://github.com/easy-coding-standard/easy-coding-standard/issues",
-                "source": "https://github.com/easy-coding-standard/easy-coding-standard/tree/11.3.2"
+                "source": "https://github.com/easy-coding-standard/easy-coding-standard/tree/12.0.6"
             },
             "funding": [
                 {
@@ -1006,7 +1006,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-22T15:28:51+00:00"
+            "time": "2023-07-25T17:12:00+00:00"
         }
     ],
     "packages-dev": [
