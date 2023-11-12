@@ -30,7 +30,7 @@ class Config
             SetList::TYPE_DECLARATION,
             DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
             SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
-            SensiolabsSetList::FRAMEWORK_EXTRA_61,
+            SensiolabsSetList::ANNOTATIONS_TO_ATTRIBUTES,
         ]);
 
         $rectorConfig->rules([
