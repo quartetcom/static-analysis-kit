@@ -6,35 +6,31 @@ namespace Quartetcom\StaticAnalysisKit\Rector;
 
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
+use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\Php81\Rector\ClassConst\FinalizePublicClassConstantRector;
-use Rector\PHPUnit\Rector\Class_\AddProphecyTraitRector;
+use Rector\PHPUnit\Set\PHPUnitLevelSetList;
+use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
 use Rector\Symfony\Set\SensiolabsSetList;
 use Rector\Symfony\Set\SymfonySetList;
 
 class Config
 {
+    /**
+     * @throws ShouldNotHappenException
+     */
     public static function use(RectorConfig $rectorConfig): void
     {
         $rectorConfig->sets([
             SetList::CODE_QUALITY,
             SetList::DEAD_CODE,
-            SetList::PHP_70,
-            SetList::PHP_71,
-            SetList::PHP_72,
-            SetList::PHP_73,
-            SetList::PHP_74,
-            SetList::PHP_80,
-            SetList::PHP_81,
             SetList::TYPE_DECLARATION,
+            LevelSetList::UP_TO_PHP_81,
+            PHPUnitLevelSetList::UP_TO_PHPUNIT_90,
             DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
             SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
-            SensiolabsSetList::FRAMEWORK_EXTRA_61,
-        ]);
-
-        $rectorConfig->rules([
-            AddProphecyTraitRector::class,
+            SensiolabsSetList::ANNOTATIONS_TO_ATTRIBUTES,
         ]);
 
         $rectorConfig->skip([
@@ -49,7 +45,7 @@ class Config
 
         $ciDetectorClasses = array_filter(
             get_declared_classes(),
-            fn (string $class): bool => str_ends_with($class, '\OndraM\CiDetector\CiDetector'),
+            static fn (string $class): bool => str_ends_with($class, '\OndraM\CiDetector\CiDetector'),
         );
 
         // @phpstan-ignore-next-line

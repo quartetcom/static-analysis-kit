@@ -18,10 +18,10 @@ class Config extends BaseConfig
         '@PhpCsFixer' => true,
         '@Symfony' => true,
         '@DoctrineAnnotation' => true,
+        'braces_position' => true,
         'concat_space' => ['spacing' => 'one'],
         'control_structure_braces' => true,
         'control_structure_continuation_position' => true,
-        'curly_braces_position' => true,
         'declare_parentheses' => true,
         'general_phpdoc_annotation_remove' => [
             'annotations' => ['author', 'package', 'subpackage'],
@@ -38,6 +38,7 @@ class Config extends BaseConfig
         'self_static_accessor' => true,
         'simplified_if_return' => true,
         'simplified_null_return' => true,
+        'single_line_empty_body' => false,
         'single_line_throw' => false,
         'statement_indentation' => true,
         'trailing_comma_in_multiline' => [

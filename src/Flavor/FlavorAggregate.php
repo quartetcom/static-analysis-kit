@@ -20,7 +20,7 @@ class FlavorAggregate
     public static function fromClassNames(array $classNames): self
     {
         return new self(array_map(
-            fn (string $className): FlavorInterface => [$className, 'create'](),
+            static fn (string $className): FlavorInterface => [$className, 'create'](),
             $classNames,
         ));
     }
@@ -31,7 +31,7 @@ class FlavorAggregate
     public function names(): array
     {
         return array_map(
-            fn (FlavorInterface $flavor): string => $flavor->name(),
+            static fn (FlavorInterface $flavor): string => $flavor->name(),
             $this->flavors,
         );
     }
