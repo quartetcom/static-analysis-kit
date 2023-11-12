@@ -38,6 +38,7 @@ class Config extends BaseConfig
         'self_static_accessor' => true,
         'simplified_if_return' => true,
         'simplified_null_return' => true,
+        'single_line_empty_body' => false,
         'single_line_throw' => false,
         'statement_indentation' => true,
         'trailing_comma_in_multiline' => [
