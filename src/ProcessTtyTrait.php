@@ -19,8 +19,7 @@ trait ProcessTtyTrait
             return $process->run(function (string $type, string $buffer): void {
                 $type === Process::ERR
                     ? fwrite(\STDERR, $buffer)
-                    : fwrite(\STDOUT, $buffer)
-                ;
+                    : fwrite(\STDOUT, $buffer);
             });
         }
     }
