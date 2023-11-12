@@ -23,6 +23,9 @@
     "require-dev": {
         "composer/composer": "^2.5"
     },
+    "conflict": {
+        "phpunit/phpunit": "<9"
+    },
     "autoload": {
         "psr-4": {
             "Quartetcom\\StaticAnalysisKit\\": "src/"
