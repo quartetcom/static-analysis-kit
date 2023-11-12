@@ -16,7 +16,7 @@ trait ProcessTtyTrait
                 ->run()
             ;
         } catch (\Exception) {
-            return $process->run(function (string $type, string $buffer): void {
+            return $process->run(static function (string $type, string $buffer): void {
                 $type === Process::ERR
                     ? fwrite(\STDERR, $buffer)
                     : fwrite(\STDOUT, $buffer);
