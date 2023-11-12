@@ -59,6 +59,7 @@ use PhpCsFixer\Fixer\FunctionNotation\LambdaNotUsedImportFixer;
 use PhpCsFixer\Fixer\FunctionNotation\NativeFunctionInvocationFixer;
 use PhpCsFixer\Fixer\FunctionNotation\NoUnreachableDefaultArgumentValueFixer;
 use PhpCsFixer\Fixer\FunctionNotation\NoUselessSprintfFixer;
+use PhpCsFixer\Fixer\FunctionNotation\StaticLambdaFixer;
 use PhpCsFixer\Fixer\FunctionNotation\UseArrowFunctionsFixer;
 use PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer;
 use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
@@ -224,6 +225,7 @@ class Config
             SimplifiedIfReturnFixer::class,
             SimplifiedNullReturnFixer::class,
             StandardizeNotEqualsFixer::class, // Symfony
+            StaticLambdaFixer::class, // PhpCsFixer
             SwitchContinueToBreakFixer::class, // Symfony
             TernaryToNullCoalescingFixer::class, // PHP70Migration
             TypesSpacesFixer::class, // Symfony

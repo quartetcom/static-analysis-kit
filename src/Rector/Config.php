@@ -45,7 +45,7 @@ class Config
 
         $ciDetectorClasses = array_filter(
             get_declared_classes(),
-            fn (string $class): bool => str_ends_with($class, '\OndraM\CiDetector\CiDetector'),
+            static fn (string $class): bool => str_ends_with($class, '\OndraM\CiDetector\CiDetector'),
         );
 
         // @phpstan-ignore-next-line
