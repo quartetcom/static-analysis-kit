@@ -14,7 +14,7 @@ class Config extends BaseConfig
      */
     public array $normalRules = [
         '@PSR12' => true,
-        '@PHP81Migration' => true,
+        '@PHP83Migration' => true,
         '@PhpCsFixer' => true,
         '@Symfony' => true,
         '@DoctrineAnnotation' => true,
