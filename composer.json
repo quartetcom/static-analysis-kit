@@ -11,7 +11,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "composer-plugin-api": "*",
         "php-cs-fixer/shim": "^3.40.2",
         "phpstan/phpstan": "^1.10.47",

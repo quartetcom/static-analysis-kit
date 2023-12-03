@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "09fab2f7a9d833853ce834fb6bdc74c5",
+    "content-hash": "a9c8da5a7e01f34020a0dee7d01da745",
     "packages": [
         {
             "name": "php-cs-fixer/shim",
@@ -2312,7 +2312,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.2",
+        "php": "^8.3",
         "composer-plugin-api": "*"
     },
     "platform-dev": [],
