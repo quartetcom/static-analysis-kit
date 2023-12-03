@@ -26,7 +26,7 @@ class Config
             SetList::CODE_QUALITY,
             SetList::DEAD_CODE,
             SetList::TYPE_DECLARATION,
-            LevelSetList::UP_TO_PHP_82,
+            LevelSetList::UP_TO_PHP_83,
             PHPUnitLevelSetList::UP_TO_PHPUNIT_100,
             DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
             SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
