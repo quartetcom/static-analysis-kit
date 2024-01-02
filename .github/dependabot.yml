@@ -12,5 +12,6 @@ updates:
 
   - package-ecosystem: github-actions
     directory: /
+    target-branch: '8.1'
     schedule:
       interval: weekly
