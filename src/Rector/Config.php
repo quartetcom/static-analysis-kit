@@ -6,8 +6,8 @@ namespace Quartetcom\StaticAnalysisKit\Rector;
 
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
-use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Doctrine\Set\DoctrineSetList;
+use Rector\Exception\ShouldNotHappenException;
 use Rector\Php81\Rector\ClassConst\FinalizePublicClassConstantRector;
 use Rector\PHPUnit\Set\PHPUnitLevelSetList;
 use Rector\Set\ValueObject\LevelSetList;
