@@ -9,7 +9,7 @@ use Rector\Config\RectorConfig;
 use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\Exception\ShouldNotHappenException;
 use Rector\Php81\Rector\ClassConst\FinalizePublicClassConstantRector;
-use Rector\PHPUnit\Set\PHPUnitLevelSetList;
+use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
 use Rector\Symfony\Set\SensiolabsSetList;
@@ -27,7 +27,7 @@ class Config
             SetList::DEAD_CODE,
             SetList::TYPE_DECLARATION,
             LevelSetList::UP_TO_PHP_82,
-            PHPUnitLevelSetList::UP_TO_PHPUNIT_100,
+            PHPUnitSetList::PHPUNIT_100,
             DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
             SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
             SensiolabsSetList::ANNOTATIONS_TO_ATTRIBUTES,
