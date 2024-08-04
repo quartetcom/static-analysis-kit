@@ -8,7 +8,6 @@ use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
 use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\Exception\ShouldNotHappenException;
-use Rector\Php81\Rector\ClassConst\FinalizePublicClassConstantRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
@@ -31,10 +30,6 @@ class Config
             DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
             SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
             SensiolabsSetList::ANNOTATIONS_TO_ATTRIBUTES,
-        ]);
-
-        $rectorConfig->skip([
-            FinalizePublicClassConstantRector::class,
         ]);
 
         $rectorConfig->importNames();
